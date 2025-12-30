@@ -20,6 +20,31 @@ async def talk(update: Update, context: ContextTypes.DEFAULT_TYPE):
             chat_id=update.effective_chat.id,
             text="Здарово, брат!",
         )
+    elif 'пока' in text.lower():
+        await context.bot.send_message(
+            chat_id=update.effective_chat.id,
+            text='пока, бро, возращайся!'
+        )
+    elif 'спасибо' in text.lower():
+        await context.bot.send_message(
+            chat_id=update.effective_chat.id,
+            text='обращайся'
+        )
+    elif 'а как какать' in text.lower():
+        await context.bot.send_message(
+            chat_id=update.effective_chat.id,
+            text='ну смотри... надо снять штаны, потом снять трусы, сесть, а дальше всё само пойдёт'
+        )
+    elif 'ахах' in text.lower():
+        await context.bot.send_message(
+            chat_id=update.effective_chat.id,
+            text='АХАХАХАХАХАХХХХХАХААХАХАХААХАХАХАХАХАХАХААХ'
+        )
+    elif 'ура' in text.lower():
+        await context.bot.send_message(
+            chat_id=update.effective_chat.id,
+            text='роблокс'
+        )
     # чтобы тут обрабатывались 5 рандомных фраз
     else:
         await context.bot.send_message(

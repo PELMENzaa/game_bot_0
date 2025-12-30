@@ -13,10 +13,7 @@ import os
 
 async def biba(update: Update, context: ContextTypes.DEFAULT_TYPE):
     text = update.effective_message.text
-    await context.bot.send_message(
-        chat_id=update.effective_chat.id,
-        text="боба",
-    )
+
     if 'биба' in text.lower():
         await context.bot.send_message(
             chat_id=update.effective_chat.id,

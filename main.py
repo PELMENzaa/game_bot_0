@@ -15,6 +15,7 @@ import os
 
 from bibaboba import biba
 from talk import talk
+from game import game_start, game
 
 load_dotenv()
 
@@ -22,7 +23,7 @@ logging.basicConfig(
     format="%(asctime)s - %(name)s - %(levelname)s - %(message)s",
     level=logging.INFO,
 )
-MAINMENU, TALK, BIBA = range(3)
+MAINMENU, TALK, BIBA, GUESS_NUMBER = range(3)
 
 
 # callback
@@ -66,9 +67,12 @@ if __name__ == "__main__":
         states={
             MAINMENU: [
                 CommandHandler("talk", talk_start),
-                CommandHandler("biba", biba),
+                CommandHandler("biba", biba_start),
+                CommandHandler('game', game_start)
             ],
             TALK: [MessageHandler(filters.TEXT & ~filters.COMMAND, talk)],
+            BIBA: [MessageHandler(filters.TEXT & ~filters.COMMAND, biba)],
+            GUESS_NUMBER: [MessageHandler(filters.TEXT & ~filters.COMMAND, game)]
         },
         fallbacks=[CommandHandler("start", start)],
     )
