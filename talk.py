@@ -13,6 +13,15 @@ from dotenv import load_dotenv
 
 import os
 
+from states import TALK
+
+async def talk_start(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    await context.bot.send_message(
+        chat_id=update.effective_chat.id,
+        text='чтобы поговорить, напиши что нибудь!'
+    )
+    return TALK
+
 async def talk(update: Update, context: ContextTypes.DEFAULT_TYPE):
     text = update.effective_message.text
     if "привет" in text.lower():

@@ -13,6 +13,7 @@ from dotenv import load_dotenv
 
 import os
 
+from states import GUESS_NUMBER
 
 load_dotenv()
 async def game_start(update: Update, context: ContextTypes.DEFAULT_TYPE):
@@ -22,5 +23,5 @@ async def game_start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     )
     return GUESS_NUMBER
 
-async def game():
-    pass
+async def game(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    text = Update.effective_message.text
