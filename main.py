@@ -10,15 +10,15 @@ from telegram.ext import (
 )
 
 from dotenv import load_dotenv
+load_dotenv()
 
 import os
 
 from bibaboba import biba, biba_start
 from talk import talk, talk_start
 from game import game_start, game
+from menu import start
 from states import MAINMENU, TALK, BIBA, GUESS_NUMBER
-
-load_dotenv()
 
 logging.basicConfig(
     format="%(asctime)s - %(name)s - %(levelname)s - %(message)s",
@@ -44,5 +44,4 @@ if __name__ == "__main__":
     )
 
     application.add_handler(conv_handler)
-
     application.run_polling()

@@ -25,3 +25,4 @@ async def game_start(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
 async def game(update: Update, context: ContextTypes.DEFAULT_TYPE):
     text = Update.effective_message.text
+    
