@@ -16,6 +16,10 @@ import os
 from states import TALK
 
 async def talk_start(update: Update, context: ContextTypes.DEFAULT_TYPE):
+        
+    query = update.callback_query
+    await query.answer()
+    
     await context.bot.send_message(
         chat_id=update.effective_chat.id,
         text='чтобы поговорить, напиши что нибудь!'

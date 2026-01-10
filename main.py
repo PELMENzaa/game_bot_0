@@ -1,5 +1,5 @@
 import logging
-from telegram import Update
+from telegram import (Update, ReplyKeyboardMarkup, InlineKeyboardMarkup, KeyboardButton, InlineKeyboardButton)
 from telegram.ext import (
     ApplicationBuilder,
     ContextTypes,
@@ -7,6 +7,7 @@ from telegram.ext import (
     MessageHandler,
     filters,
     ConversationHandler,
+    CallbackQueryHandler
 )
 
 from dotenv import load_dotenv
@@ -34,7 +35,11 @@ if __name__ == "__main__":
             MAINMENU: [
                 CommandHandler("talk", talk_start),
                 CommandHandler("biba", biba_start),
-                CommandHandler('game', game_start)
+                CommandHandler('game', game_start),
+        
+                CallbackQueryHandler(pattern='talk', callback=talk_start),
+                CallbackQueryHandler(pattern='biba', callback=biba_start),
+                CallbackQueryHandler(pattern='guess_number', callback=game_start)
             ],
             TALK: [MessageHandler(filters.TEXT & ~filters.COMMAND, talk)],
             BIBA: [MessageHandler(filters.TEXT & ~filters.COMMAND, biba)],
