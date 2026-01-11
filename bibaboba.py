@@ -1,15 +1,7 @@
 from telegram import Update, ReplyKeyboardMarkup
 from telegram.ext import (
-    ApplicationBuilder,
-    ContextTypes,
-    CommandHandler,
-    MessageHandler,
-    filters,
-    ConversationHandler,
+    ContextTypes
 )
-from dotenv import load_dotenv
-
-import os
 
 from states import BIBA
 
