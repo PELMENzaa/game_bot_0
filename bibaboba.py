@@ -10,9 +10,13 @@ async def biba_start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     query = update.callback_query
     await query.answer()
     
+    keyboard = [
+        ['Биба'],['Боба']]
+    markup = ReplyKeyboardMarkup(keyboard)
     await context.bot.send_message(
         chat_id=update.effective_chat.id,
         text="играем в биба-боба! напиши биба или боба, чтобы получить второго!",
+        reply_markup=markup
     )
     return BIBA
 

@@ -1,22 +1,9 @@
-import logging
 from telegram import Update, ReplyKeyboardMarkup, InlineKeyboardButton, InlineKeyboardMarkup
-from telegram.ext import (
-    ApplicationBuilder,
-    ContextTypes,
-    CommandHandler,
-    MessageHandler,
-    filters,
-    ConversationHandler,
-)
-
-from dotenv import load_dotenv
-
-import os
+from telegram.ext import ContextTypes
 
 from states import GUESS_NUMBER
 from menu import start
 
-load_dotenv()
 async def game_start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     
     query = update.callback_query
