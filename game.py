@@ -24,44 +24,56 @@ async def game_start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     
 async def game(update: Update, context: ContextTypes.DEFAULT_TYPE):
     text = update.effective_message.text
+    keyboard = [['больше', 'меньше'],['угадал']]
+    markup = ReplyKeyboardMarkup(keyboard)
     if text == 'загадал':
-        keyboard = [['больше', 'меньше'],['угадал']]
-        markup = ReplyKeyboardMarkup(keyboard)
-        gran_up = 100
-        gran_down = 0
-        is_game_over = False
-        while not is_game_over:
-            text = update.effective_message.text
-            middle = (gran_down + gran_up) // 2
-            await context.bot.send_message(
-                chat_id=update.effective_chat.id,
-                text= f'{middle}?',
-                reply_markup=markup
-            )
-            
-        
-            if 'больше' in text.lower():
-                gran_down = middle
-            elif 'меньше' in text.lower():
-                gran_up = middle
-            elif 'угадал' in text.lower():
-                start(update, context)
-                is_game_over = True
-                await context.bot.send_message(
-                    chat_id=update.effective_chat.id,
-                    text= 'ура! я выиграл!'
-                )
-            if middle == 99 and 'больше' in text.lower():
-                await context.bot.send_message(
-                    chat_id=update.effective_chat.id,
-                    text= 'значит ты загадал число 100!\nура! я выиграл!'
-                )
-            start(update, context)
-            is_game_over = True
-    if text == 'шот я передумал':
+        context.user_data['gran_up'] = 101
+        context.user_data['gran_down'] = 0
+        context.user_data['middle'] = (context.user_data['gran_down'] + context.user_data['gran_up']) // 2
+        await context.bot.send_message(
+            chat_id=update.effective_chat.id,
+            text= f'{context.user_data['middle']}?',
+            reply_markup=markup
+        )
+    elif 'больше' in text.lower() or 'меньше' in text.lower():
+        if 'больше' in text.lower():
+            context.user_data['gran_down'] = context.user_data['middle']
+        elif 'меньше' in text.lower():
+            context.user_data['gran_up'] = context.user_data['middle']
+        context.user_data['middle'] = (context.user_data['gran_down'] + context.user_data['gran_up']) // 2
+        await context.bot.send_message(
+            chat_id=update.effective_chat.id,
+            text= f'{context.user_data['middle']}?',
+            reply_markup=markup
+        )
+    elif 'угадал' in text.lower():
+        await context.bot.send_message(
+            chat_id=update.effective_chat.id,
+            text= 'ура! я выиграл!'
+        )
+        return await start(update, context)
+    if context.user_data['middle']==100:
+        await context.bot.send_message(
+            chat_id=update.effective_chat.id,
+            text= 'значит ты загадал 100! я выиграл!'
+        )
+        return await start(update, context)
+    elif context.user_data['middle']==0:
+        await context.bot.send_message(
+            chat_id=update.effective_chat.id,
+            text= 'значит ты загадал 0! я выиграл!'
+        )
+        return await start(update, context)
+    if context.user_data['gran_up'] - context.user_data['gran_down'] <= 1:
+        await context.bot.send_message(
+            chat_id=update.effective_chat.id,
+            text= 'нет такого числа! ты обманываешь меня! отправляемся в главное меню'
+        )
+        return await start(update, context)
+    elif text == 'шот я передумал':
         await context.bot.send_message(
             chat_id=update.effective_chat.id,
             text= 'окей, возвращаемся в главное меню'
         )
-        start(update, context)
+        return await start(update, context)
     

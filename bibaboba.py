@@ -3,7 +3,8 @@ from telegram.ext import (
     ContextTypes
 )
 
-from states import BIBA
+from states import BIBA, MAINMENU
+from menu import start
 
 async def biba_start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     
@@ -11,7 +12,7 @@ async def biba_start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await query.answer()
     
     keyboard = [
-        ['Биба'],['Боба']]
+        ['Биба','Боба'],['Вернуться в меню']]
     markup = ReplyKeyboardMarkup(keyboard)
     await context.bot.send_message(
         chat_id=update.effective_chat.id,
@@ -24,7 +25,7 @@ async def biba_start(update: Update, context: ContextTypes.DEFAULT_TYPE):
 async def biba(update: Update, context: ContextTypes.DEFAULT_TYPE):
     
     keyboard = [
-        ['Биба'],['Боба']
+        ['Биба','Боба'],['Вернуться в меню']
     ]
     markup = ReplyKeyboardMarkup(keyboard)
     text = update.effective_message.text
@@ -40,3 +41,9 @@ async def biba(update: Update, context: ContextTypes.DEFAULT_TYPE):
             text="биба",
             reply_markup=markup
         )
+    elif 'вернуться в меню' in text.lower():
+        await context.bot.send_message(
+            chat_id=update.effective_chat.id,
+            text="возвращаемся в главное меню"
+        )
+        return await start(update, context)

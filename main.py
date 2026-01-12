@@ -33,10 +33,6 @@ if __name__ == "__main__":
         entry_points=[CommandHandler("start", start)],
         states={
             MAINMENU: [
-                CommandHandler("talk", talk_start),
-                CommandHandler("biba", biba_start),
-                CommandHandler('game', game_start),
-        
                 CallbackQueryHandler(pattern='talk', callback=talk_start),
                 CallbackQueryHandler(pattern='biba', callback=biba_start),
                 CallbackQueryHandler(pattern='guess_number', callback=game_start)
