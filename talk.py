@@ -8,64 +8,73 @@ from telegram.ext import (
     filters,
     ConversationHandler,
 )
-
-from dotenv import load_dotenv
-
-import os
-
+from openai import OpenAI
 from states import TALK
+from menu import start
 
 async def talk_start(update: Update, context: ContextTypes.DEFAULT_TYPE):
-        
+
     query = update.callback_query
     await query.answer()
-    
+
     await context.bot.send_message(
-        chat_id=update.effective_chat.id,
-        text='чтобы поговорить, напиши что нибудь!'
+        chat_id=update.effective_chat.id, text="чтобы поговорить, напиши что нибудь!, когда надоест, напиши слово меню"
     )
     return TALK
 
+
 async def talk(update: Update, context: ContextTypes.DEFAULT_TYPE):
     text = update.effective_message.text
+    chat_id = update.effective_chat.id
     if "привет" in text.lower():
         await context.bot.send_message(
-            chat_id=update.effective_chat.id,
+            chat_id=chat_id,
             text="Здарово, брат!",
         )
-    elif 'пока' in text.lower():
+    elif "пока" in text.lower():
+        await context.bot.send_message(chat_id=chat_id, text="пока, бро, возращайся!")
+    elif "спасибо" in text.lower():
+        await context.bot.send_message(chat_id=chat_id, text="обращайся")
+    elif "а как какать" in text.lower():
         await context.bot.send_message(
-            chat_id=update.effective_chat.id,
-            text='пока, бро, возращайся!'
+            chat_id=chat_id,
+            text="ну смотри... надо снять штаны, потом снять трусы, сесть, а дальше всё само пойдёт",
         )
-    elif 'спасибо' in text.lower():
+    elif "ахах" in text.lower():
         await context.bot.send_message(
-            chat_id=update.effective_chat.id,
-            text='обращайся'
+            chat_id=chat_id, text="АХАХАХАХАХАХХХХХАХААХАХАХААХАХАХАХАХАХАХААХ"
         )
-    elif 'а как какать' in text.lower():
+    elif "ура" in text.lower():
+        await context.bot.send_message(chat_id=chat_id, text="роблокс")
+    elif "котики" in text.lower():
+        await context.bot.send_message(chat_id=chat_id, text="Лучшие")
+    elif text == 'меню' or text == 'Меню':
         await context.bot.send_message(
-            chat_id=update.effective_chat.id,
-            text='ну смотри... надо снять штаны, потом снять трусы, сесть, а дальше всё само пойдёт'
-        )
-    elif 'ахах' in text.lower():
-        await context.bot.send_message(
-            chat_id=update.effective_chat.id,
-            text='АХАХАХАХАХАХХХХХАХААХАХАХААХАХАХАХАХАХАХААХ'
-        )
-    elif 'ура' in text.lower():
-        await context.bot.send_message(
-            chat_id=update.effective_chat.id,
-            text='роблокс'
-        )
-    elif 'котики' in text.lower():
-        await context.bot.send_message(
-            chat_id=update.effective_chat.id,
-            text='Лучшие'
-        )
-    # чтобы тут обрабатывались 5 рандомных фраз
+            chat_id=chat_id,
+            text="возвращаемся в меню"
+            )
+
+        return await start(update, context)
     else:
-        await context.bot.send_message(
-            chat_id=update.effective_chat.id,
-            text=text,
+        if len(context.user_data["previous_message"]) > 10:
+            context.user_data["previous_message"].pop(0)
+            context.user_data["previous_message"].pop(0)
+        client = OpenAI()
+        response = client.responses.create(
+            model="gpt-5-nano",
+            reasoning={"effort": "low"},
+            input=[
+                {
+                    "role": "developer",
+                    "content": "ты телеграмм бот, который отвечает на сообщения пользователей в дружелюбной манере. Отвечай как главный приколист в компании. отвечай кратко, только на русском языке.",
+                }
+            ]
+            + context.user_data["previous_message"]
+            + [{"role": "user", "content": text}],
+        )
+        response_text = response.output_text
+        await context.bot.send_message(chat_id=chat_id, text=response_text)
+        context.user_data["previous_message"].append({"role": "user", "content": text})
+        context.user_data["previous_message"].append(
+            {"role": "assistant", "content": response_text}
         )

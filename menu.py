@@ -19,9 +19,11 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
             [InlineKeyboardButton("Угадай моё число", callback_data='guess_number')]
         ]
     markup = InlineKeyboardMarkup(keyboard)
+    context.user_data['previous_message'] = []
     await context.bot.send_message(
         chat_id=update.effective_chat.id,
         text=f"Привет {update.effective_user.first_name}!. чем займемся?",
         reply_markup=markup
+        
     )
     return MAINMENU
