@@ -20,7 +20,8 @@ from bibaboba import biba, biba_start
 from talk import talk, talk_start
 from game import game_start, game
 from menu import start
-from states import MAINMENU, TALK, BIBA, GUESS_NUMBER
+from states import MAINMENU, TALK, BIBA, GUESS_NUMBER, TICTACTOE
+from tictactoe import tictactoe_start
 
 logging.basicConfig(
     format="%(asctime)s - %(name)s - %(levelname)s - %(message)s",
@@ -36,11 +37,13 @@ if __name__ == "__main__":
             MAINMENU: [
                 CallbackQueryHandler(pattern='talk', callback=talk_start),
                 CallbackQueryHandler(pattern='biba', callback=biba_start),
-                CallbackQueryHandler(pattern='guess_number', callback=game_start)
+                CallbackQueryHandler(pattern='guess_number', callback=game_start),
+                CallbackQueryHandler(pattern='tictactoe', callback=tictactoe_start)
             ],
             TALK: [MessageHandler(filters.TEXT & ~filters.COMMAND, talk)],
             BIBA: [MessageHandler(filters.TEXT & ~filters.COMMAND, biba)],
             GUESS_NUMBER: [MessageHandler(filters.TEXT & ~filters.COMMAND, game)]
+            
         },
         fallbacks=[CommandHandler("start", start)],
     )

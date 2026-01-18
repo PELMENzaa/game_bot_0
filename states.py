@@ -13,4 +13,4 @@ from dotenv import load_dotenv
 
 import os
 
-MAINMENU, TALK, BIBA, GUESS_NUMBER = range(4)
+MAINMENU, TALK, BIBA, GUESS_NUMBER, TICTACTOE = range(5)

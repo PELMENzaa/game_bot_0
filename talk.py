@@ -26,14 +26,25 @@ async def talk_start(update: Update, context: ContextTypes.DEFAULT_TYPE):
 async def talk(update: Update, context: ContextTypes.DEFAULT_TYPE):
     text = update.effective_message.text
     chat_id = update.effective_chat.id
-    if "привет" in text.lower():
+    if text.lower() == "привет":
         await context.bot.send_message(
             chat_id=chat_id,
             text="Здарово, брат!",
         )
-    elif "пока" in text.lower():
+    elif text.lower() == "пока":
         await context.bot.send_message(chat_id=chat_id, text="пока, бро, возращайся!")
-    elif "спасибо" in text.lower():
+    elif text.lower() == "спасибо":
+        await context.bot.send_message(chat_id=chat_id, text="обращайся")
+    elif text.lower() == "а как какать":
+        await context.bot.send_message(
+            chat_id=chat_id,
+            text="ну смотри... надо снять штаны, потом снять трусы, сесть, а дальше всё само пойдёт",
+        )
+    elif text.lower() == "ахах":
+        await context.bot.send_message(
+            chat_id=chat_id, text="АХАХАХАХАХАХХХХХАХААХАХАХААХАХАХАХАХАХАХААХ"
+        )
+    elif text.lower() == "спасибо":
         await context.bot.send_message(chat_id=chat_id, text="обращайся")
     elif "а как какать" in text.lower():
         await context.bot.send_message(
