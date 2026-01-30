@@ -11,9 +11,9 @@ async def game_start(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
     await context.bot.send_message(
         chat_id=update.effective_chat.id,
-        text= 'так. ну я значит угадываю число, кароче, отвечай, больше, меньше или угадал'
+        text= 'я угадываю число, отвечай, больше, меньше или угадал'
     )
-    keyboard = [['загадал'],['шот я передумал']]
+    keyboard = [['загадал'],['вернуться в меню']]
     markup = ReplyKeyboardMarkup(keyboard)
     await context.bot.send_message(
         chat_id=update.effective_chat.id,
@@ -70,7 +70,7 @@ async def game(update: Update, context: ContextTypes.DEFAULT_TYPE):
             text= 'нет такого числа! ты обманываешь меня! отправляемся в главное меню'
         )
         return await start(update, context)
-    elif text == 'шот я передумал':
+    elif text == 'вернуться в меню':
         await context.bot.send_message(
             chat_id=update.effective_chat.id,
             text= 'окей, возвращаемся в главное меню'
