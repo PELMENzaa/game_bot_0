@@ -5,7 +5,6 @@ from menu import start
 
 
 async def tictactoe_start(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    """Йоу"""
     context.user_data["i"] = '❌'
     query = update.callback_query  # Полная информация о нажатой кнопке
     await query.answer()  # отвечаем на запрос
@@ -48,7 +47,7 @@ async def tictactoe_start(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
 
 async def tictactoe(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    """Йоу"""
+    
     i = context.user_data["i"]
     if i == '❌':
         context.user_data["i"] = '⭕'
