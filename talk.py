@@ -40,6 +40,11 @@ async def talk(update: Update, context: ContextTypes.DEFAULT_TYPE):
             chat_id=chat_id,
             text="ну смотри... надо снять штаны, потом снять трусы, сесть, а дальше всё само пойдёт",
         )
+    elif text.lower() == "какая погода":
+        await context.bot.send_message(
+            chat_id=chat_id,
+            text="ХОЛОДНО!!!"
+        )
     elif text.lower() == "ахах":
         await context.bot.send_message(
             chat_id=chat_id, text="АХАХАХАХАХАХХХХХАХААХАХАХААХАХАХАХАХАХАХААХ"
