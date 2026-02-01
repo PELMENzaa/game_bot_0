@@ -1,7 +1,7 @@
 from telegram import InlineKeyboardButton, Update, InlineKeyboardMarkup
 from telegram.ext import ContextTypes
-from states import TICTACTOE
-from modes.menu import start
+from config.states import TICTACTOE
+from handlers.menu import start
 
 
 async def tictactoe_start(update: Update, context: ContextTypes.DEFAULT_TYPE):

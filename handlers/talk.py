@@ -9,8 +9,8 @@ from telegram.ext import (
     ConversationHandler,
 )
 from openai import OpenAI
-from states import TALK
-from modes.menu import start
+from config.states import TALK
+from handlers.menu import start
 
 async def talk_start(update: Update, context: ContextTypes.DEFAULT_TYPE):
 

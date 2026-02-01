@@ -3,8 +3,8 @@ from telegram.ext import (
     ContextTypes
 )
 
-from states import BIBA, MAINMENU
-from modes.menu import start
+from config.states import BIBA, MAINMENU
+from handlers.menu import start
 
 async def biba_start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     

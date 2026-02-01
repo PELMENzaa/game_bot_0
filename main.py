@@ -23,12 +23,12 @@ load_dotenv()
 
 import os
 
-from modes.bibaboba import biba, biba_start
-from modes.talk import talk, talk_start
-from modes.game import game_start, game
-from modes.menu import start
-from states import MAINMENU, TALK, BIBA, GUESS_NUMBER, TICTACTOE
-from modes.tictactoe import tictactoe_start, tictactoe
+from handlers.bibaboba import biba, biba_start
+from handlers.talk import talk, talk_start
+from handlers.game import game_start, game
+from handlers.menu import start
+from config.states import MAINMENU, TALK, BIBA, GUESS_NUMBER, TICTACTOE
+from handlers.tictactoe import tictactoe_start, tictactoe
 
 logging.basicConfig(
     format="%(asctime)s - %(name)s - %(levelname)s - %(message)s",

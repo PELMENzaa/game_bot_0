@@ -8,7 +8,7 @@ from telegram.ext import (
     filters,
     ConversationHandler,
 )
-from states import MAINMENU
+from config.states import MAINMENU
 
 
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):

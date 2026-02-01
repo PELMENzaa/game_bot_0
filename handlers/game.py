@@ -1,8 +1,8 @@
 from telegram import Update, ReplyKeyboardMarkup, InlineKeyboardButton, InlineKeyboardMarkup
 from telegram.ext import ContextTypes
 
-from states import GUESS_NUMBER
-from modes.menu import start
+from config.states import GUESS_NUMBER
+from handlers.menu import start
 
 async def game_start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     
