@@ -50,7 +50,8 @@ if __name__ == "__main__":
             TALK: [MessageHandler(filters.TEXT & ~filters.COMMAND, talk)],
             BIBA: [MessageHandler(filters.TEXT & ~filters.COMMAND, biba)],
             GUESS_NUMBER: [MessageHandler(filters.TEXT & ~filters.COMMAND, game)],
-            TICTACTOE: [CallbackQueryHandler(callback=tictactoe, pattern="^[0-8]$")],
+            TICTACTOE: [CallbackQueryHandler(callback=tictactoe, pattern="^[0-8]$"), 
+                        CallbackQueryHandler(pattern='menu', callback=start)],
         },
         fallbacks=[CommandHandler("start", start)],
     )

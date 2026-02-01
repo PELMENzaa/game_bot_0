@@ -13,6 +13,10 @@ from states import MAINMENU
 
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
+    query = update.callback_query
+    if query:
+        await query.answer()
+
     keyboard = [
             [InlineKeyboardButton("Поговорим", callback_data='talk')],
             [InlineKeyboardButton("Поиграем в Биба-Боба", callback_data='biba')],

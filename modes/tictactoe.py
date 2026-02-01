@@ -36,6 +36,8 @@ async def tictactoe_start(update: Update, context: ContextTypes.DEFAULT_TYPE):
             InlineKeyboardButton(lst[7], callback_data="7"),
             InlineKeyboardButton(lst[8], callback_data="8"),
         ],
+        [   InlineKeyboardButton('меню', callback_data='menu')
+        ]
     ]
     markup = InlineKeyboardMarkup(keyboard)
     await context.bot.send_message(
@@ -187,6 +189,8 @@ async def tictactoe(update: Update, context: ContextTypes.DEFAULT_TYPE):
             InlineKeyboardButton(lst[7], callback_data="7"),
             InlineKeyboardButton(lst[8], callback_data="8"),
         ],
+        [   InlineKeyboardButton('меню', callback_data='menu')
+        ]
     ]
     markup = InlineKeyboardMarkup(keyboard)
     if i == '⭕':
