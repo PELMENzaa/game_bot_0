@@ -13,7 +13,7 @@ async def game_start(update: Update, context: ContextTypes.DEFAULT_TYPE):
         chat_id=update.effective_chat.id,
         text= 'я угадываю число, отвечай, больше, меньше или угадал'
     )
-    keyboard = [['загадал'],['вернуться в меню']]
+    keyboard = [['загадал'],['шот я передумал']]
     markup = ReplyKeyboardMarkup(keyboard)
     await context.bot.send_message(
         chat_id=update.effective_chat.id,
