@@ -10,7 +10,7 @@ from telegram.ext import (
 )
 from openai import OpenAI
 from states import TALK
-from menu import start
+from modes.menu import start
 
 async def talk_start(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
