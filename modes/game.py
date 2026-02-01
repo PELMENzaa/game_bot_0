@@ -2,7 +2,7 @@ from telegram import Update, ReplyKeyboardMarkup, InlineKeyboardButton, InlineKe
 from telegram.ext import ContextTypes
 
 from states import GUESS_NUMBER
-from menu import start
+from modes.menu import start
 
 async def game_start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     

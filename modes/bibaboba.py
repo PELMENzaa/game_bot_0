@@ -4,7 +4,7 @@ from telegram.ext import (
 )
 
 from states import BIBA, MAINMENU
-from menu import start
+from modes.menu import start
 
 async def biba_start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     
