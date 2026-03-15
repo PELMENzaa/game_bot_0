@@ -27,8 +27,10 @@ from handlers.bibaboba import biba, biba_start
 from handlers.talk import talk, talk_start
 from handlers.game import game_start, game
 from handlers.menu import start
-from config.states import MAINMENU, TALK, BIBA, GUESS_NUMBER, TICTACTOE
+from config.states import MAINMENU, TALK, BIBA, GUESS_NUMBER, TICTACTOE, TICTACTOE_GPT, TICTACTOE_ONLINE
 from handlers.tictactoe import tictactoe_start, tictactoe
+from handlers.tictactoe_online import tictactoe_online_start, tictactoe_online
+from handlers.tictactoe_gpt import tictactoe_gpt_start, tictactoe_gpt
 
 logging.basicConfig(
     format="%(asctime)s - %(name)s - %(levelname)s - %(message)s",
@@ -46,11 +48,17 @@ if __name__ == "__main__":
                 CallbackQueryHandler(pattern="biba", callback=biba_start),
                 CallbackQueryHandler(pattern="guess_number", callback=game_start),
                 CallbackQueryHandler(pattern="tictactoe", callback=tictactoe_start),
+                CallbackQueryHandler(pattern="tictactoe_online", callback=tictactoe_online_start),
+                CallbackQueryHandler(pattern="tictactoe_gpt", callback=tictactoe_gpt_start),
             ],
             TALK: [MessageHandler(filters.TEXT & ~filters.COMMAND, talk)],
             BIBA: [MessageHandler(filters.TEXT & ~filters.COMMAND, biba)],
             GUESS_NUMBER: [MessageHandler(filters.TEXT & ~filters.COMMAND, game)],
             TICTACTOE: [CallbackQueryHandler(callback=tictactoe, pattern="^[0-8]$"), 
+                        CallbackQueryHandler(pattern='menu', callback=start)],
+            TICTACTOE_ONLINE: [CallbackQueryHandler(callback=tictactoe, pattern="^[0-8]$"), 
+                        CallbackQueryHandler(pattern='menu', callback=start)],
+            TICTACTOE_GPT: [CallbackQueryHandler(callback=tictactoe, pattern="^[0-8]$"), 
                         CallbackQueryHandler(pattern='menu', callback=start)],
         },
         fallbacks=[CommandHandler("start", start)],
